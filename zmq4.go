@@ -553,6 +553,30 @@ func (soc *Socket) Unbind(endpoint string) error {
 }
 
 /*
+Set Send High Watermark. ZMQ_SNDHWM
+For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
+*/
+func (soc *Socket) SetSendHighWaterMark( hwm int) error {
+
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_SNDHWM, hwm); int(i) != 0 {
+		return errget(err)
+	}
+	return nil
+}
+
+/*
+Set Receive High Watermark. ZMQ_RCVHWM
+For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
+*/
+func (soc *Socket) SetReceiveHighWaterMark( hwm int) error {
+
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_RCVHWM, hwm); int(i) != 0 {
+		return errget(err)
+	}
+	return nil
+}
+
+/*
 Create outgoing connection from socket.
 
 For a description of endpoint, see: http://api.zeromq.org/4-0:zmq-connect#toc2
