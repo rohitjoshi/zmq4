@@ -557,20 +557,21 @@ Set Send High Watermark. ZMQ_SNDHWM
 For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
 */
 func (soc *Socket) SetSendHighWaterMark( hwm int) error {
-
-	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_SNDHWM, hwm, C.size_t(hwm)); int(i) != 0 {
+        val := C.int(hwm)
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_SNDHWM, unsafe.Pointer(&val), C.size_t(unsafe.Sizeof(val))); int(i) != 0 {
 		return errget(err)
 	}
 	return nil
 }
+
 
 /*
 Set Receive High Watermark. ZMQ_RCVHWM
 For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
 */
 func (soc *Socket) SetReceiveHighWaterMark( hwm int) error {
-
-	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_RCVHWM, hwm, C.size_t(hwm)); int(i) != 0 {
+          val := C.int(hwm)
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_RCVHWM, unsafe.Pointer(&val), C.size_t(unsafe.Sizeof(val))); int(i) != 0 {
 		return errget(err)
 	}
 	return nil
