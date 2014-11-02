@@ -558,7 +558,7 @@ For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
 */
 func (soc *Socket) SetSendHighWaterMark( hwm int) error {
 
-	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_SNDHWM, hwm, C.size_t(unsafe.Sizeof(hwm))); int(i) != 0 {
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_SNDHWM, hwm, C.size_t(hwm)); int(i) != 0 {
 		return errget(err)
 	}
 	return nil
@@ -570,7 +570,7 @@ For a description, see http://api.zeromq.org/3-0:zmq-setsockopt
 */
 func (soc *Socket) SetReceiveHighWaterMark( hwm int) error {
 
-	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_RCVHWM, hwm, C.size_t(unsafe.Sizeof(hwm))); int(i) != 0 {
+	if i, err := C.zmq_setsockopt(soc.soc, C.ZMQ_RCVHWM, hwm, C.size_t(hwm)); int(i) != 0 {
 		return errget(err)
 	}
 	return nil
